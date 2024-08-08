@@ -55,7 +55,7 @@ const RegisterPage = () => {
     try {
       const response =await axios.post(URL,data)
       toast.success(response.data.message)
-      console.log("response",response)
+      //console.log("response",response)
        if(response.data.success){
         setData({
           name: "",
@@ -69,7 +69,7 @@ const RegisterPage = () => {
       toast.error(error?.response?.data?.message)
       //console.log("error",error)
     }
-    console.log(data);
+    //console.log(data);
   }
 
 

@@ -27,12 +27,11 @@ const Home = () => {
 
       dispatch(setUser(response.data.data))
       if (response.data.data.logout) {
-        
         dispatch(logout());
-         navigate("/email");
+         //navigate("/email");
       }
 
-      console.log("Current user Details", response);
+      //console.log("Current user Details", response);
     } catch (error) {
       console.log("error",error);
     }
@@ -52,7 +51,7 @@ const Home = () => {
     })
 
     socketConnection.on('onlineUser',(data)=>{
-      console.log(data)
+     // console.log(data)
       dispatch(setOnlineUser(data))
     })
 

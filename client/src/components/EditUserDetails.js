@@ -22,7 +22,7 @@ const dispatch=useDispatch()
             }
         })
     },[user])
-console.log('user edit',user)
+//console.log('user edit',user)
 
     const handelOnChange=(e)=>{
         const {name,value} =e.target
@@ -66,7 +66,7 @@ console.log('user edit',user)
                 data: data,
                 withCredentials:true
             })
-            console.log("rsponsee",response)
+            //console.log("rsponsee",response)
             toast.success(response?.data?.message)
 
             if(response.data.success){
@@ -75,7 +75,7 @@ console.log('user edit',user)
             }
 
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             toast.error()
         }
     }

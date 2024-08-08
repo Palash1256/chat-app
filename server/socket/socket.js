@@ -10,8 +10,8 @@ const app=express()
 
 const corsOptions = {
     origin: 'https://chat-app-amber-nine-31.vercel.app',
-    credentials: true, // Enable cookies to be included in requests
-    methods: ['GET', 'POST'], // Allow specific methods
+    credentials: true, 
+    methods: ['GET', 'POST'],
 };
 app.use(cors(corsOptions));
 
@@ -74,7 +74,7 @@ io.on('connection',async(socket)=>{
     //new message
     socket.on('new message',async(data)=>{
         //check conversation is available both user
-        console.log("new message",data)
+        //console.log("new message",data)
         let conversation= await ConversationModel.findOne({
             '$or' : [
                 { 
@@ -87,7 +87,7 @@ io.on('connection',async(socket)=>{
                 }
             ]
         })
-        console.log("Conversation",conversation)
+        //console.log("Conversation",conversation)
         //if conversation is not available 
         if(!conversation){
             const createConversation = await ConversationModel({
@@ -97,8 +97,8 @@ io.on('connection',async(socket)=>{
             conversation = await createConversation.save()
         }
 
-        console.log('new message',data)
-        console.log("Conversation",conversation)
+        // console.log('new message',data)
+        // console.log("Conversation",conversation)
 
         const message = new MessageModel({
             text : data.text,

@@ -26,11 +26,10 @@ const Home = () => {
       });
 
       dispatch(setUser(response.data.data))
-      // console.log("current data -------------", response.data.data)
       if (response.data.data.logout) {
-        console.log("current data -------------",response.data.data)
+        
         dispatch(logout());
-        // navigate("/email");
+         navigate("/email");
       }
 
       console.log("Current user Details", response);

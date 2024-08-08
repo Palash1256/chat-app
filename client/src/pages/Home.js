@@ -13,8 +13,8 @@ const Home = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // console.log("redux-user", user);
-  // console.log('user',user)
+  console.log("redux-user", user);
+  console.log('user',user)
 
 
   const fetchUserDetails = async () => {
@@ -26,10 +26,10 @@ const Home = () => {
       });
 
       dispatch(setUser(response.data.data))
-      if (response.data.data.logout) {
-        dispatch(logout());
-         //navigate("/email");
-      }
+      // if (response.data.data.logout) {
+      //   dispatch(logout());
+      //    //navigate("/email");
+      // }
 
       //console.log("Current user Details", response);
     } catch (error) {

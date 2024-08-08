@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 const getUserDetailsFromToken = require("../helpers/getUserDetailsFromToken");
 async function userDetails(req, res) {
   try {
-    //console.log(req.cookies);
+    // console.log(req.cookies);
     const token = req.cookies.token || "";
 
     const user = await getUserDetailsFromToken(token);

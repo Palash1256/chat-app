@@ -43,7 +43,7 @@ const CheckPasswordPage = () => {
 
     try {
       const response = await axios({
-        method: "post",
+        method: "POST",
         url: URL,
         data: {
           userId: location?.state?._id,
@@ -51,6 +51,8 @@ const CheckPasswordPage = () => {
         },
         withCredentials: true,
       });
+
+      console.log(response)
 
       toast.success(response.data.message);
 

@@ -14,7 +14,7 @@ const Home = () => {
   const location = useLocation()
 
   // console.log("redux-user", user);
-  console.log('user',user)
+  // console.log('user',user)
 
 
   const fetchUserDetails = async () => {
@@ -26,10 +26,11 @@ const Home = () => {
       });
 
       dispatch(setUser(response.data.data))
-
+      // console.log("current data -------------", response.data.data)
       if (response.data.data.logout) {
+        console.log("current data -------------",response.data.data)
         dispatch(logout());
-        navigate("/email");
+        // navigate("/email");
       }
 
       console.log("Current user Details", response);

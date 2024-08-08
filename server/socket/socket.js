@@ -5,16 +5,20 @@ const getUserDetailsFromToken = require('../helpers/getUserDetailsFromToken')
 const UserModel = require('../models/UserModel')
 const { ConversationModel, MessageModel } = require('../models/ConversationModel')
 const getConversation = require("../helpers/getConversation")
+const cors = require('cors');
 const app=express()
+
+const corsOptions = {
+    origin: 'https://chat-app-amber-nine-31.vercel.app',
+    credentials: true, // Enable cookies to be included in requests
+    methods: ['GET', 'POST'], // Allow specific methods
+};
+app.use(cors(corsOptions));
 
 /* socket  connection */
 const server = http.createServer(app)
 const io = new Server(server,{
-    cors: {
-        origin:"https://chat-app-amber-nine-31.vercel.app",
-        credentials:true,
-        methods: ["GET", "POST"]
-    }
+    cors: corsOptions
 })
 
         /*Scoket running at http://localhost:8080/ */

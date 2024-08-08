@@ -10,8 +10,8 @@ const getUserDetailsFromToken = require("../helpers/getUserDetailsFromToken");
 async function userDetails(req, res) {
   try {
     console.log("userDetails cookies",req);
-    //const token = req.cookies.token || "";
-    const token=localStorage.getItem("token")
+    const token = req.cookies.token || "";
+    
 
     const user = await getUserDetailsFromToken(token);
 

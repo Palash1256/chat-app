@@ -31,7 +31,7 @@ const Home = () => {
       //    //navigate("/email");
       // }
 
-      //console.log("Current user Details", response);
+      console.log("Current user Details", response);
     } catch (error) {
       console.log("error",error);
     }

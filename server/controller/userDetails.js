@@ -5,6 +5,8 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 const getUserDetailsFromToken = require("../helpers/getUserDetailsFromToken");
 async function userDetails(req, res) {

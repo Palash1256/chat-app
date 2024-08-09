@@ -7,7 +7,7 @@ async function checkPassword(req, res) {
     //console.log("body",req.body);
 
     const user = await UserModel.findById(userId);
-     //console.log(user);
+    //console.log(user);
 
     const verifyPassword = await bcryptjs.compare(password, user.password);
 
@@ -29,6 +29,7 @@ async function checkPassword(req, res) {
       http: true,
       secure: true,
     };
+    res.setHeader("SameSite", "none");
 
     return res.cookie("token", token, cookiesOption).status(200).json({
       message: "User login Successfully",

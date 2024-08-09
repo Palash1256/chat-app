@@ -27,10 +27,10 @@ const Home = () => {
       });
 
       dispatch(setUser(response.data.data))
-      // if (response.data.data.logout) {
-      //   dispatch(logout());
-      //    //navigate("/email");
-      // }
+      if (response.data.data.logout) {
+        dispatch(logout());
+         //navigate("/email");
+      }
 
       console.log("Current user Details", response);
     } catch (error) {

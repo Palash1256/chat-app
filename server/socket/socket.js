@@ -9,7 +9,7 @@ const cors = require('cors');
 const app=express()
 
 const corsOptions = {
-    origin: 'https://chat-app-amber-nine-31.vercel.app',
+    origin: process.env.FRONTENED_URL,
     credentials: true, 
     methods: ['GET', 'POST'],
 };

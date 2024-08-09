@@ -22,7 +22,7 @@ async function checkPassword(req, res) {
       email: user.email,
     };
     const token = await jwt.sign(tokenData, process.env.JWT_SECREAT_KEY, {
-      expiresIn: "1d",
+      expiresIn: "1y",
     });
 
     const cookiesOption = {
@@ -31,7 +31,7 @@ async function checkPassword(req, res) {
       sameSite: 'None'
     };
 
-    return res.cookie("token", token, cookiesOption).status(200).json({
+    res.cookie("token", token, cookiesOption).status(200).json({
       message: "User login Successfully",
       token: token,
       success: true,

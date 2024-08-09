@@ -10,8 +10,8 @@ const { app, server } = require('./socket/socket')
 
 
 app.use(cors({
-  origin:"https://chat-app-amber-nine-31.vercel.app",
-  credentials: true
+  origin: process.env.FRONTENED_URL,
+  credentials: true,
 }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));

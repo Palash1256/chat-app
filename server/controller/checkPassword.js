@@ -28,8 +28,8 @@ async function checkPassword(req, res) {
     const cookiesOption = {
       http: true,
       secure: true,
+      sameSite: 'None'
     };
-    res.setHeader("Set-Cookie", "SameSite=None");
 
     return res.cookie("token", token, cookiesOption).status(200).json({
       message: "User login Successfully",

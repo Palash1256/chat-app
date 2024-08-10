@@ -55,7 +55,7 @@ const CheckEmailPage = () => {
 
         <div className="w-fit mx-auto">
           <LuUserCircle2
-            size={100}
+            size={70}
           />
 
         </div>

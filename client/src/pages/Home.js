@@ -13,8 +13,8 @@ const Home = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log("redux-user", user);
-  console.log('user',user)
+  // console.log("redux-user", user);
+  // console.log('user',user)
 
 
   const fetchUserDetails = async () => {
@@ -32,7 +32,7 @@ const Home = () => {
          //navigate("/email");
       }
 
-      console.log("Current user Details", response);
+     // console.log("Current user Details", response);
     } catch (error) {
       console.log("error",error);
     }

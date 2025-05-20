@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 const getUserDetailsFromToken = require("../helpers/getUserDetailsFromToken");
 async function userDetails(req, res) {
   try {
-    console.log("userDetails cookies",req);
-    const token = req.cookies.token || "";
-    
+    // Get token from Authorization header: "Bearer <token>"
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
 
     const user = await getUserDetailsFromToken(token);
 

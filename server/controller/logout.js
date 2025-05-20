@@ -1,12 +1,6 @@
 async function logout(req, res) {
   try {
-
-    const cookiesOption = {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'None'
-    };
-    return res.cookie("token", '', cookiesOption).status(200).json({
+    return res.status(200).json({
       message: "Session Out",
       success: true,
     });

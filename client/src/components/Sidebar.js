@@ -62,8 +62,11 @@ const Sidebar = () => {
 
   const handelLogout = async () => {
     try {
+      const token = localStorage.getItem("token");
       await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/logout`, {
-        withCredentials: true
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
     } catch (err) {
       // Optionally handle error

@@ -60,18 +60,19 @@ const EditUserDetails = ({ onClose, user }) => {
         try {
             console.log("userSubmit")
             const URL = `${process.env.REACT_APP_BACKEND_URL}/api/update-user`;
-            console.log("URL", URL)
             // Only send necessary fields
             const payload = {
                 name: data.name,
                 profile_pic: data.profile_pic
             }
-            console.log("payload", payload)
+            const token = localStorage.getItem("token");
             const response = await axios({
                 method: 'post',
                 url: URL,
                 data: payload,
-                withCredentials: true
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             console.log("rsponsee", response)
             toast.success(response?.data?.message)

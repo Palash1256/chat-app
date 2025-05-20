@@ -8,7 +8,7 @@ const bodyParser = require("body-parser")
 const cookiesParser = require('cookie-parser')
 const { app, server } = require('./socket/socket')
 
-
+ 
 app.use(cors({
   origin: process.env.FRONTENED_URL, // e.g. "https://your-frontend-domain.com"
   credentials: true,

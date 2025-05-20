@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BsChatDots } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa6";
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { CiLogout } from "react-icons/ci";
 import Avatar from './Avatar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,15 +13,17 @@ import { FaImage } from "react-icons/fa6";
 import { IoIosVideocam } from "react-icons/io";
 import { logout } from '../redux/userSlice';
 import { useSocket } from '../context/SocketContext';
+import axios from 'axios';
 
 const Sidebar = () => {
   const user = useSelector(state => state?.user)
   const [editUserOpen, setEditUserOpen] = useState(false)
   const [allUser, setAllUser] = useState([])
   const [openSearchUser, setOpenSearchUser] = useState(false)
-  const socket = useSocket();
+  const { socket } = useSocket();
   const dispatch = useDispatch()
   const nevigate = useNavigate()
+  const location = useLocation();
 
   useEffect(() => {
     if (socket) {
@@ -58,7 +60,14 @@ const Sidebar = () => {
     }
   }, [socket, user])
 
-  const handelLogout = () => {
+  const handelLogout = async () => {
+    try {
+      await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/logout`, {
+        withCredentials: true
+      });
+    } catch (err) {
+      // Optionally handle error
+    }
     dispatch(logout())
     nevigate("/email")
     localStorage.clear()
@@ -118,6 +127,8 @@ const Sidebar = () => {
 
           {
             allUser.map((conv, index) => {
+              // Check if the current conversation is open
+              const isCurrentConversationOpen = location.pathname === '/' + conv?.userDetails?._id;
               return (
                 <NavLink to={'/' + conv?.userDetails?._id} key={conv?._id} className='flex items-center gap-2 py-3 px-2 border border-transparent hover:border-primary rounded hover:bg-slate-100 cursor-pointer'>
                   <div>
@@ -153,7 +164,9 @@ const Sidebar = () => {
                     </div>
                   </div>
                   {
-                    Boolean(conv?.unseenMag) && (
+                    Boolean(conv?.unseenMag) &&
+                    conv?.lastMsg?.msgByUserId !== user._id &&
+                    !isCurrentConversationOpen && (
                       <p className='text-xs h-5 w-5 flex justify-center items-center ml-auto p-1 bg-primary text-white font-semibold rounded-full'>{conv?.unseenMag}</p>
                     )
                   }

@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux';
 export default function MessagePage() {
 
   const params = useParams()
-  const socket = useSocket();
+  const { socket } = useSocket();
   const user = useSelector(state => state.user)
   const [dataUser, setDataUser] = useState({
     name: "",

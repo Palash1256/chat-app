@@ -12,7 +12,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const socket = useSocket();
+  const { socket } = useSocket();
 
   // console.log("redux-user", user);
   // console.log('user',user)

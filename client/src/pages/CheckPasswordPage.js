@@ -8,6 +8,7 @@ import { PiUserCircle } from "react-icons/pi";
 import Avatar from "../components/Avatar";
 import { useDispatch } from "react-redux";
 import { setToken, setUser } from "../redux/userSlice";
+import { useSocket } from "../context/SocketContext";
 
 const CheckPasswordPage = () => {
   const [data, setData] = useState({
@@ -17,6 +18,7 @@ const CheckPasswordPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const { refreshSocket } = useSocket();
 
   useEffect(() => {
     if (!location?.state?.name) {
@@ -63,6 +65,10 @@ const CheckPasswordPage = () => {
         setData({
           password: "",
         });
+
+        // Refresh socket connection with new token
+        if (refreshSocket) refreshSocket();
+
         navigate("/");
       }
     } catch (error) {

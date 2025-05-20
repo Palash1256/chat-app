@@ -286,7 +286,7 @@ export default function MessagePage() {
 
           {
             openImageVideoUpload && (
-              <div className='bg-white shadow rounded absolute bottom-12 bottom-0 w-36 p-2'>
+              <div className='bg-white shadow rounded absolute bottom-12 w-36 p-2'>
                 <form>
                   <label htmlFor='uploadImage' className='flex items-center p-2 px-3  gap-3 hover:bg-slate-200 cursor-pointer'>
                     <div className=' text-primary'>

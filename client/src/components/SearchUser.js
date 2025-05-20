@@ -35,10 +35,10 @@ const SearchUser = ({onClose}) => {
 //console.log("searchUser",searchUser)
 
   return (
-    <div className='fixed top-0 bottom-0 left-0 right-0 bg-slate-700 bg-opacity-40 p-2 z-10'>
-      <div className='w-full max-w-md mx-auto  mt-10'>
+    <div className='fixed top-0 bottom-0 left-0 right-0 bg-slate-700 bg-opacity-40 p-2 z-10 overflow-auto'>
+      <div className='w-full max-w-md mx-auto  mt-10' >
         {/* input search user */}
-       <div className='bg-white rounded h-14 overflow-hidden flex'>
+       <div className='bg-white rounded h-14 overflow-hidden flex position:sticky'>
             <input
                 type='text'
                 placeholder='Search usdrd by name, email...'
@@ -51,7 +51,7 @@ const SearchUser = ({onClose}) => {
               </div>
        </div>
        {/* display search user  */}
-       <div className='bg-white mt-2 w-full p-4 rounded'>
+       <div className='bg-white mt-2 w-full p-4 rounded overflow-auto'>
               {/* no user found */}
               {
                 searchUser.length === 0 && !loading &&(

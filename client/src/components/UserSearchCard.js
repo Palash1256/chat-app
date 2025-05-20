@@ -15,7 +15,7 @@ const UserSearchCard = ({user,onClose}) => {
         />
      </div>
      <div>
-        <div className='font-semibold text-ellipsis line-clamp-1'>
+        <div className='font-semibold text-ellipsis line-clamp-1 capitalize overflow-hidden'>
             {user?.name}
         </div>
         <p className='text-sm text-ellipsis line-clamp-1'>{user.email}</p>

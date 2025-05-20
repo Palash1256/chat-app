@@ -9,7 +9,7 @@ const cors = require('cors');
 const app = express()
 
 const corsOptions = {
-    origin: process.env.FRONTENED_URL,
+    origin: process.env.FRONTENED_URL, // e.g. "https://your-frontend-domain.com"
     credentials: true,
     methods: ['GET', 'POST'],
 };

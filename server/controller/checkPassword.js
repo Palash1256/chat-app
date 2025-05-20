@@ -26,7 +26,7 @@ async function checkPassword(req, res) {
     });
 
     const cookiesOption = {
-      http: true,
+      httpOnly: true,
       secure: true,
       sameSite: 'None'
     };

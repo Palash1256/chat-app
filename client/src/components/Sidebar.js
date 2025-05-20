@@ -71,6 +71,10 @@ const Sidebar = () => {
     } catch (err) {
       // Optionally handle error
     }
+    // Disconnect socket on logout
+    if (socket) {
+      socket.disconnect();
+    }
     dispatch(logout())
     nevigate("/email")
     localStorage.clear()

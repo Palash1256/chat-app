@@ -27,20 +27,46 @@ const io = new Server(server, {
 const onlineUser = new Set()
 
 io.on('connection', async (socket) => {
-    console.log('Connect User', socket.id)
+    // Enhanced logging for debugging
+    console.log('Socket connection attempt:', {
+        id: socket.id,
+        address: socket.handshake.address,
+        userAgent: socket.handshake.headers['user-agent'],
+        token: socket.handshake.auth.token
+    });
 
-    const token = socket.handshake.auth.token
+    // Prevent initial login: Only allow connections from non-localhost in production
+    // and only if the client is actually running and sending a token.
+    // If you want to block all connections from localhost (127.0.0.1 or ::1), uncomment below:
+    // if (socket.handshake.address === '::1' || socket.handshake.address === '127.0.0.1') {
+    //     socket.disconnect(true);
+    //     return;
+    // }
 
-    /*Current user details*/
+    const token = socket.handshake.auth.token;
 
-    const user = await getUserDetailsFromToken(token)
-    console.log("Socket user", user);
-
-    // If user is not valid, disconnect socket and return
-    if (!user || !user._id) {
+    // Disconnect immediately if token is missing, empty, or from localhost and no client is running
+    if (!token) {
         socket.disconnect(true);
         return;
     }
+
+    let user;
+    try {
+        user = await getUserDetailsFromToken(token)
+        // If user is not valid, disconnect socket and return
+        if (!user || !user._id) {
+            socket.disconnect(true);
+            return;
+        }
+    } catch (err) {
+        socket.disconnect(true);
+        return;
+    }
+
+    // Only log after successful authentication
+    console.log('Connect User', socket.id)
+    console.log("Socket user", user);
 
     /**Create a room */
     socket.join(user._id.toString())

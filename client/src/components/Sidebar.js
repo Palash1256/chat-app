@@ -99,7 +99,7 @@ const Sidebar = () => {
           <button className='mx-auto' title={user?.name} onClick={() => { setEditUserOpen(true) }}>
             <Avatar
               width={40}
-              height={40}
+              height={50}
               name={user?.name}
               imageUrl={user?.profile_pic}
               userId={user?._id}
@@ -142,8 +142,8 @@ const Sidebar = () => {
                     <Avatar
                       imageUrl={conv?.userDetails?.profile_pic}
                       name={conv?.userDetails?.name}
-                      width={50}
-                      height={50}
+                      width={40}
+                      height={40}
                     />
                   </div>
                   <div>

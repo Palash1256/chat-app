@@ -81,8 +81,8 @@ const CheckPasswordPage = () => {
       <div className="bg-white w-full max-w-md  rounded overflow-hidden p-4 mx-auto">
         <div className="w-fit mx-auto mb-2 flex justify-center items-center flex-col">
           <Avatar
-            width={50}
-            height={70}
+            width={60}
+            height={60}
             name={location?.state?.name}
             imageUrl={location?.state?.profile_pic}
           />
@@ -98,7 +98,7 @@ const CheckPasswordPage = () => {
               type="password"
               id="password"
               name="password"
-              placeholder="enter your password"
+              placeholder="Enter Your Password"
               className="bg-slate-100 px-2 py-1 focus:outline-primary"
               value={data.password}
               onChange={handleOnChange}

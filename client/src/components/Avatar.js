@@ -1,9 +1,9 @@
 import React from "react";
 import { LuUserCircle2 } from "react-icons/lu";
 import { useSelector } from "react-redux";
-const Avatar = ({ userId, name, imageUrl, width, height }) => {
+const Avatar = ({ userId, name, imageUrl, width = 56, height = 56 }) => {
 
-  const onlineUser =useSelector(state => state?.user?.onlineUser)
+  const onlineUser = useSelector(state => state?.user?.onlineUser)
 
 
   let avatarName = "";
@@ -29,7 +29,7 @@ const Avatar = ({ userId, name, imageUrl, width, height }) => {
     "bg-cyan-200",
     "bg-cyan-200",
   ];
-  const randomNumber=Math.floor(Math.random() *11)
+  const randomNumber = Math.floor(Math.random() * 11)
 
   const isOnline = onlineUser.includes(userId)
 
@@ -46,12 +46,12 @@ const Avatar = ({ userId, name, imageUrl, width, height }) => {
           width={width}
           height={height}
           alt={name}
-          className="overdlow-hidden rounded-full"
+          className="object-cover rounded-full w-full h-full"
         />
       ) : name ? (
         <div
           style={{ width: width + "px", height: height + "px" }}
-          className={`overdlow-hidden rounded-full flex justify-center items-center text-lg ${bgColor[randomNumber]}`}
+          className={`rounded-full flex justify-center items-center text-lg ${bgColor[randomNumber]} w-full h-full`}
         >
           {avatarName}
         </div>

@@ -15,7 +15,7 @@ const bcryptjs = require("bcryptjs");
 async function registerUser(req, res) {
   try {
     const { name, email, password, profile_pic } = req.body;
-      console.log("Server side", req.body);
+    console.log("Server side", req.body);
     const checkEmail = await UserModel.findOne({ email });
     if (checkEmail) {
       return res.status(400).json({
@@ -44,10 +44,12 @@ async function registerUser(req, res) {
     });
   } catch (error) {
     return res.status(500).json({
-      message: error.message ||error,
+      message: error.message || error,
       error: true,
     });
   }
 }
+
+// No changes needed here for OTP, registration is only allowed after OTP verification in the client.
 
 module.exports = registerUser;

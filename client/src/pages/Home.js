@@ -37,7 +37,7 @@ const Home = () => {
       }
     } catch (error) {
       console.log("error", error);
-      dispatch(logout());
+      //dispatch(logout());
       navigate("/email"); // <-- redirect here if error (e.g. session expired)
     }
   };

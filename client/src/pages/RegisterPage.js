@@ -17,6 +17,8 @@ const RegisterPage = () => {
   const [otp, setOtp] = useState("");
   const [serverOtp, setServerOtp] = useState("");
   const [emailChecked, setEmailChecked] = useState(false);
+  const [buttonText, setButtonText] = useState("Register");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Email validation regex
@@ -51,8 +53,12 @@ const RegisterPage = () => {
 
   // Check email validity and uniqueness
   const handleCheckEmail = async () => {
+    setButtonText("Verifying Email...");
+    setLoading(true);
     if (!isValidEmail(data.email)) {
       toast.error("Please enter a valid email address.");
+      setButtonText("Register");
+      setLoading(false);
       return false;
     }
     try {
@@ -60,24 +66,39 @@ const RegisterPage = () => {
       const response = await axios.post(URL, { email: data.email });
       if (response.data.success) {
         toast.error("Email already registered.");
+        setButtonText("Register");
+        setLoading(false);
         return false;
       }
     } catch (error) {
       // If error is 400, user does not exist, so it's OK to proceed
       if (error?.response?.status === 400) {
         setEmailChecked(true);
+        setButtonText("Sending OTP...");
+        setLoading(false);
         return true;
       }
       toast.error("Error checking email.");
+      setButtonText("Register");
+      setLoading(false);
       return false;
     }
+    setButtonText("Register");
+    setLoading(false);
     return false;
   };
 
   // Send OTP to email
   const handleSendOtp = async () => {
+    setButtonText("Verifying Email...");
+    setLoading(true);
     const valid = await handleCheckEmail();
-    if (!valid) return;
+    if (!valid) {
+      setButtonText("Register");
+      setLoading(false);
+      return;
+    }
+    setButtonText("Sending OTP...");
     try {
       const URL = `${process.env.REACT_APP_BACKEND_URL}/api/send-otp`;
       const response = await axios.post(URL, { email: data.email });
@@ -85,12 +106,16 @@ const RegisterPage = () => {
         setServerOtp(response.data.otp); // For demo, in real app, don't expose OTP
         setStep(2);
         toast.success("OTP sent to your email.");
+        setButtonText("Register");
       } else {
         toast.error("Failed to send OTP.");
+        setButtonText("Register");
       }
     } catch (error) {
       toast.error("Failed to send OTP.");
+      setButtonText("Register");
     }
+    setLoading(false);
   };
 
   // Verify OTP and register
@@ -202,8 +227,9 @@ const RegisterPage = () => {
             <button
               className="bg-primary text-lg px-4 py-1 hover:bg-secondary rounded-full mt-2 font-bold text-white leading-relaxed tracking-wider"
               type="submit"
+              disabled={loading}
             >
-              Register
+              {buttonText}
             </button>
           </form>
         )}

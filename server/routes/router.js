@@ -10,6 +10,8 @@ const searchUser = require("../controller/searchUser");
 // Add OTP controllers
 const sendOtp = require("../controller/sendOtp");
 const verifyOtp = require("../controller/verifyOtp");
+// Add updatePassword controller
+const updatePassword = require("../controller/updatePassword");
 
 const router = express.Router();
 
@@ -31,5 +33,8 @@ router.post('/search-user', searchUser)
 // OTP routes
 router.post('/send-otp', sendOtp)
 router.post('/verify-otp', verifyOtp)
+
+// Add update password route
+router.post('/update-password', updatePassword)
 
 module.exports = router;

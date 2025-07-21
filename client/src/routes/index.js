@@ -17,6 +17,15 @@ const PublicRoute = ({ children }) => {
     return children;
 };
 
+// ProtectedRoute: Redirect to email if no token
+const ProtectedRoute = ({ children }) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        return <Navigate to="/email" replace />;
+    }
+    return children;
+};
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -24,7 +33,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "register",
-                element: <AuthLayouts><RegisterPage /></AuthLayouts>
+                element: (
+                    <PublicRoute>
+                        <AuthLayouts><RegisterPage /></AuthLayouts>
+                    </PublicRoute>
+                )
             },
             {
                 path: 'email',
@@ -44,11 +57,19 @@ const router = createBrowserRouter([
             },
             {
                 path: 'forgot-password',
-                element: <AuthLayouts><ForgotPassword /></AuthLayouts>
+                element: (
+                    <PublicRoute>
+                        <AuthLayouts><ForgotPassword /></AuthLayouts>
+                    </PublicRoute>
+                )
             },
             {
                 path: "",
-                element: <Home />,
+                element: (
+                    <ProtectedRoute>
+                        <Home />
+                    </ProtectedRoute>
+                ),
                 children: [
                     {
                         path: ":userId",

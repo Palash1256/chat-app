@@ -14,14 +14,17 @@ const Home = () => {
   const location = useLocation()
   const { socket } = useSocket();
 
-  // console.log("redux-user", user);
-  // console.log('user',user)
-
-
   const fetchUserDetails = async () => {
+    const token = localStorage.getItem("token");
+
+    // Don't make API call if no token
+    if (!token) {
+      navigate("/email");
+      return;
+    }
+
     try {
       const URL = `${process.env.REACT_APP_BACKEND_URL}/api/user-details`;
-      const token = localStorage.getItem("token");
       const response = await axios({
         method: "GET",
         url: URL,
@@ -33,14 +36,18 @@ const Home = () => {
       dispatch(setUser(response.data.data))
       if (response.data.data.logout) {
         dispatch(logout());
-        navigate("/email"); // <-- redirect here if backend says logout
+        localStorage.removeItem("token");
+        navigate("/email");
       }
     } catch (error) {
       console.log("error", error);
-      //dispatch(logout());
-      navigate("/email"); // <-- redirect here if error (e.g. session expired)
+      // Clear invalid token and redirect
+      localStorage.removeItem("token");
+      dispatch(logout());
+      navigate("/email");
     }
   };
+
   useEffect(() => {
     fetchUserDetails();
     // eslint-disable-next-line
